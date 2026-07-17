@@ -5,22 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Capitals Trainer — know every capital on Earth</title>
 <meta name="description" content="Learn all 194 world capitals with flashcards, quizzes, maps and photos. Offline, no ads, no tracking. $0.99 on the App Store.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+<link rel="icon" href="img/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
     /* palette taken from the app itself */
-    --grad-top: #9e91f0;      /* marketing gradient top */
-    --grad-bottom: #6457c8;   /* marketing gradient bottom */
-    --ink: #1e1840;           /* deep violet text on light */
-    --card: #ffffff;          /* app's white rows */
-    --card-soft: #f4f3fb;     /* iOS grouped background */
-    --frame: #121216;         /* device frame / dark CTA */
-    --gold: #ffcc40;          /* icon star */
-    --fog: #5d5580;           /* secondary text on light */
-    --on-grad-fog: #eae6ff;   /* secondary text on gradient */
+    --grad-top: #9e91f0;
+    --grad-bottom: #6457c8;
+    --ink: #1e1840;
+    --card: #ffffff;
+    --card-soft: #f4f3fb;
+    --frame: #121216;
+    --gold: #ffcc40;
+    --fog: #5d5580;
+    --on-grad-fog: #eae6ff;
     --display: "Unbounded", system-ui, sans-serif;
     --body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
     --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
@@ -40,17 +40,22 @@
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
   /* header */
-  header { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 22px 0; }
   .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
-  .logo-mark {
-    width: 40px; height: 40px; border-radius: 10px; flex: none;
-    background: linear-gradient(160deg, #9e91f7, #7061d4);
-    border: 1px solid rgba(255,255,255,0.35);
-    display: grid; place-items: center; font-size: 20px;
+  .logo-img {
+    width: 40px; height: 40px; border-radius: 10px; flex: none; display: block;
     box-shadow: 0 4px 18px rgba(30,24,64,0.35);
   }
   .logo-name { font-family: var(--display); font-weight: 600; font-size: 0.95rem; letter-spacing: 0.02em; }
-  .nav a { text-decoration: none; color: var(--on-grad-fog); font-size: 0.9rem; margin-left: 24px; }
+  .head-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .langs-switch { display: flex; gap: 4px; background: rgba(255,255,255,0.12); border-radius: 999px; padding: 4px; }
+  .langs-switch button {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em;
+    background: none; border: none; color: var(--on-grad-fog);
+    padding: 5px 10px; border-radius: 999px; cursor: pointer;
+  }
+  .langs-switch button.on { background: #fff; color: var(--ink); font-weight: 700; }
+  .nav a { text-decoration: none; color: var(--on-grad-fog); font-size: 0.9rem; margin-left: 18px; }
   .nav a:hover { color: #fff; }
 
   /* hero */
@@ -79,7 +84,7 @@
     box-shadow: 0 12px 32px rgba(18,18,22,0.35);
   }
   .store-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 44px rgba(18,18,22,0.45); }
-  .store-btn svg { width: 22px; height: 22px; }
+  .store-btn svg { width: 22px; height: 22px; flex: none; }
   .price-chip { color: var(--on-grad-fog); font-size: 0.9rem; line-height: 1.4; }
   .price-chip b { color: #fff; }
 
@@ -92,7 +97,7 @@
     transform: rotate(1.5deg);
   }
   .quiz-top {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
     font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--fog); margin-bottom: 20px;
   }
@@ -159,16 +164,6 @@
   }
   .t-stat .cap { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fog); margin-top: 8px; }
   .t-wide { grid-column: span 2; grid-row: span 2; }
-  .t-lang { grid-column: span 2; grid-row: span 2; }
-  .langs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-  .langs span {
-    font-family: var(--mono); font-size: 0.8rem; padding: 6px 12px;
-    background: var(--card-soft);
-    border: 1px solid #e5e2f5; border-radius: 999px; color: var(--ink);
-  }
-  .t-dark { grid-column: span 2; grid-row: span 4; padding: 0; background: var(--frame); }
-  .t-dark img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
-  .t-offline { grid-column: span 2; grid-row: span 2; }
   .gold-dot { color: var(--gold); }
 
   /* final cta */
@@ -187,13 +182,12 @@
     .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; }
     .quiz { transform: none; }
     .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: auto; }
-    .t-shot, .t-dark { grid-row: span 1; min-height: 320px; }
-    .t-stat, .t-wide, .t-lang, .t-offline { grid-row: span 1; grid-column: span 2; }
-    .t-shot, .t-dark { grid-column: span 1; }
+    .t-shot { grid-row: span 1; grid-column: span 2; min-height: 380px; }
+    .t-stat, .t-wide { grid-row: span 1; grid-column: span 2; }
   }
   @media (max-width: 560px) {
     .bento { grid-template-columns: 1fr; }
-    .t-shot, .t-dark { grid-column: span 1; }
+    .t-shot, .t-stat, .t-wide { grid-column: span 1; }
   }
   @media (prefers-reduced-motion: reduce) {
     .ticker-track { animation: none; }
@@ -207,37 +201,46 @@
 
 <header>
   <a class="logo" href="#">
-    <span class="logo-mark" aria-hidden="true">🌐</span>
+    <img class="logo-img" src="img/icon.png" alt="Capitals Trainer app icon">
     <span class="logo-name">Capitals&nbsp;Trainer</span>
   </a>
-  <nav class="nav">
-    <a href="support.html">Support</a>
-    <a href="privacy.html">Privacy</a>
-  </nav>
+  <div class="head-right">
+    <div class="langs-switch" id="langs" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="ru">РУ</button>
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="fr">FR</button>
+      <button type="button" data-lang="de">DE</button>
+    </div>
+    <nav class="nav">
+      <a href="support.html" data-i18n="navSupport">Support</a>
+      <a href="privacy.html" data-i18n="navPrivacy">Privacy</a>
+    </nav>
+  </div>
 </header>
 
 <section class="hero">
   <div>
-    <p class="coords">48.8566° N · 2.3522° E — do you know whose?</p>
-    <h1>Know every capital on <em>Earth</em>.</h1>
-    <p class="sub">All 194 countries. Flashcards that stick, quizzes that bite, maps, flags and photos that make places real. Offline, no ads — just you and the planet.</p>
+    <p class="coords" data-i18n="coords"></p>
+    <h1 data-i18n="h1"></h1>
+    <p class="sub" data-i18n="sub"></p>
     <div class="cta-row">
       <a class="store-btn" href="https://apps.apple.com/app/id6789187328">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-2.9 2.37-4.29 2.48-4.36-1.35-1.97-3.45-2.24-4.2-2.27-1.79-.18-3.49 1.05-4.4 1.05-.9 0-2.3-1.03-3.79-1-1.95.03-3.74 1.13-4.74 2.87-2.02 3.5-.52 8.68 1.45 11.52.96 1.39 2.11 2.95 3.62 2.9 1.45-.06 2-.94 3.75-.94s2.25.94 3.79.91c1.56-.03 2.55-1.42 3.5-2.82 1.1-1.61 1.55-3.17 1.58-3.25-.04-.02-3.02-1.16-3.04-4.61zM14.16 4.02c.8-.97 1.34-2.32 1.19-3.66-1.15.05-2.55.77-3.38 1.74-.74.85-1.39 2.22-1.22 3.53 1.29.1 2.6-.65 3.41-1.61z"/></svg>
-        Download on the App&nbsp;Store
+        <span data-i18n="store"></span>
       </a>
-      <p class="price-chip"><b>$0.99</b> once · no subscriptions<br>no ads · no tracking</p>
+      <p class="price-chip" data-i18n="price"></p>
     </div>
   </div>
 
   <div class="quiz" id="quiz">
     <div class="quiz-top">
-      <span>Try it — round <span id="qnum">1</span></span>
-      <span class="quiz-streak">★ streak: <span id="streak">0</span></span>
+      <span><span data-i18n="quizTry"></span>&nbsp;<span id="qnum">1</span></span>
+      <span class="quiz-streak">★ <span data-i18n="quizStreak"></span>: <span id="streak">0</span></span>
     </div>
     <p class="quiz-q" id="question"></p>
     <div class="quiz-opts" id="opts"></div>
-    <p class="quiz-note">That little rush? The app has 194 of these. <a href="https://apps.apple.com/app/id6789187328">Get it →</a></p>
+    <p class="quiz-note" id="quiz-note"></p>
   </div>
 </section>
 </div>
@@ -249,92 +252,279 @@
 <div class="wrap">
 <section>
   <div class="bento-head">
-    <p class="eyebrow">What's inside</p>
-    <h2>A pocket atlas that quizzes back</h2>
+    <p class="eyebrow" data-i18n="inside"></p>
+    <h2 data-i18n="insideH2"></h2>
   </div>
   <div class="bento">
     <div class="tile t-shot"><img src="img/raw-home.png" alt="Capitals Trainer home screen with study sets" loading="lazy"></div>
     <div class="tile t-stat">
       <span class="big">194</span>
-      <span class="cap">countries · 6 continents</span>
+      <span class="cap" data-i18n="statCap"></span>
     </div>
     <div class="tile t-wide">
-      <h3>Flashcards &amp; quizzes</h3>
-      <p>Flip, guess, repeat. Instant feedback turns cramming into a game you keep winning.</p>
-    </div>
-    <div class="tile t-offline">
-      <h3>Offline &amp; private <span class="gold-dot">●</span></h3>
-      <p>Zero data collected, no account, no internet needed. Perfect on a plane — fitting, really.</p>
-    </div>
-    <div class="tile t-lang">
-      <h3>Speaks your language</h3>
-      <div class="langs"><span>EN</span><span>РУ</span><span>ES</span><span>FR</span><span>DE</span></div>
+      <h3 data-i18n="flashH"></h3>
+      <p data-i18n="flashP"></p>
     </div>
     <div class="tile t-wide">
-      <h3>Maps, flags, photos &amp; facts</h3>
-      <p>Every country gets a page worth lingering on — not just a name to memorize.</p>
+      <h3><span data-i18n="offlineH"></span> <span class="gold-dot">●</span></h3>
+      <p data-i18n="offlineP"></p>
     </div>
-    <div class="tile t-dark"><img src="img/raw-dark.png" alt="Dark mode home screen" loading="lazy"></div>
+    <div class="tile t-wide">
+      <h3 data-i18n="mapsH"></h3>
+      <p data-i18n="mapsP"></p>
+    </div>
   </div>
 </section>
 
 <section class="final">
-  <p class="eyebrow">One coffee. Every capital.</p>
-  <h2>Be the friend who always knows.</h2>
-  <p>Geography test, quiz night or the next trip — you're covered.</p>
+  <p class="eyebrow" data-i18n="finalEyebrow"></p>
+  <h2 data-i18n="finalH2"></h2>
+  <p data-i18n="finalP"></p>
   <a class="store-btn" href="https://apps.apple.com/app/id6789187328">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-2.9 2.37-4.29 2.48-4.36-1.35-1.97-3.45-2.24-4.2-2.27-1.79-.18-3.49 1.05-4.4 1.05-.9 0-2.3-1.03-3.79-1-1.95.03-3.74 1.13-4.74 2.87-2.02 3.5-.52 8.68 1.45 11.52.96 1.39 2.11 2.95 3.62 2.9 1.45-.06 2-.94 3.75-.94s2.25.94 3.79.91c1.56-.03 2.55-1.42 3.5-2.82 1.1-1.61 1.55-3.17 1.58-3.25-.04-.02-3.02-1.16-3.04-4.61zM14.16 4.02c.8-.97 1.34-2.32 1.19-3.66-1.15.05-2.55.77-3.38 1.74-.74.85-1.39 2.22-1.22 3.53 1.29.1 2.6-.65 3.41-1.61z"/></svg>
-    Get Capitals Trainer — $0.99
+    <span data-i18n="store2"></span>
   </a>
 </section>
 
 <footer>
   <div>
-    <a href="support.html">Support</a>
-    <a href="privacy.html">Privacy Policy</a>
+    <a href="support.html" data-i18n="navSupport"></a>
+    <a href="privacy.html" data-i18n="footerPrivacy"></a>
   </div>
   <div>© 2026 Alena Krasnoperova</div>
 </footer>
 </div>
 
 <script>
-  // hero quiz
-  const QUIZ = [
-    { f: "🇯🇵", c: "Japan", a: "Tokyo", o: ["Tokyo", "Kyoto", "Osaka", "Sapporo"] },
-    { f: "🇦🇺", c: "Australia", a: "Canberra", o: ["Sydney", "Melbourne", "Canberra", "Perth"] },
-    { f: "🇨🇦", c: "Canada", a: "Ottawa", o: ["Toronto", "Ottawa", "Vancouver", "Montreal"] },
-    { f: "🇨🇭", c: "Switzerland", a: "Bern", o: ["Zurich", "Geneva", "Bern", "Basel"] },
-    { f: "🇧🇷", c: "Brazil", a: "Brasília", o: ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"] },
-    { f: "🇹🇷", c: "Türkiye", a: "Ankara", o: ["Istanbul", "Ankara", "Izmir", "Antalya"] },
-    { f: "🇰🇿", c: "Kazakhstan", a: "Astana", o: ["Almaty", "Astana", "Shymkent", "Karaganda"] },
-    { f: "🇲🇦", c: "Morocco", a: "Rabat", o: ["Casablanca", "Marrakesh", "Rabat", "Fes"] },
-    { f: "🇳🇿", c: "New Zealand", a: "Wellington", o: ["Auckland", "Wellington", "Christchurch", "Queenstown"] },
-    { f: "🇳🇬", c: "Nigeria", a: "Abuja", o: ["Lagos", "Abuja", "Kano", "Ibadan"] },
-    { f: "🇻🇳", c: "Vietnam", a: "Hanoi", o: ["Ho Chi Minh City", "Hanoi", "Da Nang", "Hue"] },
-    { f: "🇺🇸", c: "United States", a: "Washington, D.C.", o: ["New York", "Washington, D.C.", "Los Angeles", "Chicago"] },
-  ];
+  const STR = {
+    en: {
+      title: "Capitals Trainer — know every capital on Earth",
+      navSupport: "Support", navPrivacy: "Privacy", footerPrivacy: "Privacy Policy",
+      coords: "48.8566° N · 2.3522° E — do you know whose?",
+      h1: "Know every capital on <em>Earth</em>.",
+      sub: "All 194 countries. Flashcards that stick, quizzes that bite, maps, flags and photos that make places real. Offline, no ads — just you and the planet.",
+      store: "Download on the App&nbsp;Store",
+      store2: "Get Capitals Trainer — $0.99",
+      price: "<b>$0.99</b> once · no subscriptions<br>no ads · no tracking",
+      quizTry: "Try it — round", quizStreak: "streak",
+      quizNote: 'That little rush? The app has 194 of these. <a href="https://apps.apple.com/app/id6789187328">Get it →</a>',
+      inside: "What's inside", insideH2: "A pocket atlas that quizzes back",
+      statCap: "countries · 6 continents",
+      flashH: "Flashcards & quizzes",
+      flashP: "Flip, guess, repeat. Instant feedback turns cramming into a game you keep winning.",
+      offlineH: "Offline & private",
+      offlineP: "Zero data collected, no account, no internet needed. Perfect on a plane — fitting, really.",
+      mapsH: "Maps, flags, photos & facts",
+      mapsP: "Every country gets a page worth lingering on — not just a name to memorize.",
+      finalEyebrow: "One coffee. Every capital.",
+      finalH2: "Be the friend who always knows.",
+      finalP: "Geography test, quiz night or the next trip — you're covered.",
+    },
+    ru: {
+      title: "Capitals Trainer — знайте каждую столицу на Земле",
+      navSupport: "Поддержка", navPrivacy: "Приватность", footerPrivacy: "Политика конфиденциальности",
+      coords: "48.8566° с. ш. · 2.3522° в. д. — знаете, чьи это координаты?",
+      h1: "Знайте каждую столицу на <em>Земле</em>.",
+      sub: "Все 194 страны. Карточки, которые запоминаются, викторины с подвохом, карты, флаги и фото, которые делают места живыми. Офлайн и без рекламы — только вы и планета.",
+      store: "Загрузить в App&nbsp;Store",
+      store2: "Купить Capitals Trainer — 0,99 $",
+      price: "<b>0,99 $</b> один раз · без подписок<br>без рекламы · без слежки",
+      quizTry: "Попробуйте — раунд", quizStreak: "серия",
+      quizNote: 'Почувствовали азарт? В приложении таких 194. <a href="https://apps.apple.com/app/id6789187328">Скачать →</a>',
+      inside: "Что внутри", insideH2: "Карманный атлас, который спрашивает в ответ",
+      statCap: "страны · 6 континентов",
+      flashH: "Карточки и викторины",
+      flashP: "Переверни, угадай, повтори. Мгновенная проверка превращает зубрёжку в игру, в которой хочется выигрывать.",
+      offlineH: "Офлайн и приватно",
+      offlineP: "Никаких данных, аккаунтов и интернета. Идеально в самолёте — символично, правда?",
+      mapsH: "Карты, флаги, фото и факты",
+      mapsP: "У каждой страны — страница, на которой хочется задержаться, а не просто название для зубрёжки.",
+      finalEyebrow: "Одна чашка кофе. Все столицы.",
+      finalH2: "Будьте тем, кто всегда знает ответ.",
+      finalP: "Контрольная по географии, квиз или путешествие — вы готовы.",
+    },
+    es: {
+      title: "Capitals Trainer — conoce todas las capitales de la Tierra",
+      navSupport: "Soporte", navPrivacy: "Privacidad", footerPrivacy: "Política de privacidad",
+      coords: "48.8566° N · 2.3522° E — ¿sabes de quién son?",
+      h1: "Conoce todas las capitales de la <em>Tierra</em>.",
+      sub: "Los 194 países. Tarjetas que se quedan, quizzes con trampa, mapas, banderas y fotos que hacen reales los lugares. Sin conexión y sin anuncios: solo tú y el planeta.",
+      store: "Descargar en el App&nbsp;Store",
+      store2: "Consigue Capitals Trainer — 0,99 US$",
+      price: "<b>0,99 US$</b> una vez · sin suscripciones<br>sin anuncios · sin rastreo",
+      quizTry: "Pruébalo — ronda", quizStreak: "racha",
+      quizNote: '¿Sientes el subidón? La app tiene 194 de estas. <a href="https://apps.apple.com/app/id6789187328">Consíguela →</a>',
+      inside: "Qué hay dentro", insideH2: "Un atlas de bolsillo que te pregunta",
+      statCap: "países · 6 continentes",
+      flashH: "Tarjetas y quizzes",
+      flashP: "Gira, adivina, repite. La corrección instantánea convierte el estudio en un juego que quieres ganar.",
+      offlineH: "Sin conexión y privado",
+      offlineP: "Cero datos recopilados, sin cuenta, sin internet. Perfecto en el avión — apropiado, ¿no?",
+      mapsH: "Mapas, banderas, fotos y datos",
+      mapsP: "Cada país tiene una página en la que apetece quedarse, no solo un nombre que memorizar.",
+      finalEyebrow: "Un café. Todas las capitales.",
+      finalH2: "Sé quien siempre sabe la respuesta.",
+      finalP: "Examen de geografía, noche de trivia o el próximo viaje: estás listo.",
+    },
+    fr: {
+      title: "Capitals Trainer — connaissez toutes les capitales de la Terre",
+      navSupport: "Assistance", navPrivacy: "Confidentialité", footerPrivacy: "Politique de confidentialité",
+      coords: "48,8566° N · 2,3522° E — vous savez où ?",
+      h1: "Connaissez toutes les capitales de la <em>Terre</em>.",
+      sub: "Les 194 pays. Des cartes mémo qui restent, des quiz qui piquent, des cartes, drapeaux et photos qui rendent les lieux réels. Hors ligne, sans pub — juste vous et la planète.",
+      store: "Télécharger dans l'App&nbsp;Store",
+      store2: "Obtenez Capitals Trainer — 0,99 $US",
+      price: "<b>0,99 $US</b> une fois · sans abonnement<br>sans pub · sans pistage",
+      quizTry: "Essayez — manche", quizStreak: "série",
+      quizNote: "Ce petit frisson ? L'app en contient 194. <a href=\"https://apps.apple.com/app/id6789187328\">Téléchargez →</a>",
+      inside: "À l'intérieur", insideH2: "Un atlas de poche qui vous interroge",
+      statCap: "pays · 6 continents",
+      flashH: "Cartes mémo et quiz",
+      flashP: "Retournez, devinez, recommencez. La correction instantanée transforme le bachotage en jeu.",
+      offlineH: "Hors ligne et privé",
+      offlineP: "Aucune donnée, aucun compte, pas d'internet. Parfait en avion — plutôt logique, non ?",
+      mapsH: "Cartes, drapeaux, photos et infos",
+      mapsP: "Chaque pays a une fiche où l'on s'attarde, pas juste un nom à retenir.",
+      finalEyebrow: "Un café. Toutes les capitales.",
+      finalH2: "Soyez celui qui sait toujours.",
+      finalP: "Contrôle de géo, soirée quiz ou prochain voyage — vous êtes prêt.",
+    },
+    de: {
+      title: "Capitals Trainer — kenne jede Hauptstadt der Erde",
+      navSupport: "Support", navPrivacy: "Datenschutz", footerPrivacy: "Datenschutz",
+      coords: "48,8566° N · 2,3522° O — wissen Sie, wo das ist?",
+      h1: "Kenne jede Hauptstadt der <em>Erde</em>.",
+      sub: "Alle 194 Länder. Karteikarten, die sitzen, Quiz mit Biss, Karten, Flaggen und Fotos, die Orte lebendig machen. Offline, ohne Werbung — nur du und der Planet.",
+      store: "Im App&nbsp;Store laden",
+      store2: "Hol dir Capitals Trainer — 0,99 $",
+      price: "<b>0,99 $</b> einmalig · keine Abos<br>keine Werbung · kein Tracking",
+      quizTry: "Probier's — Runde", quizStreak: "Serie",
+      quizNote: 'Dieser kleine Kick? Die App hat 194 davon. <a href="https://apps.apple.com/app/id6789187328">Hol sie dir →</a>',
+      inside: "Was drin ist", insideH2: "Ein Taschenatlas, der zurückfragt",
+      statCap: "Länder · 6 Kontinente",
+      flashH: "Karteikarten & Quiz",
+      flashP: "Umdrehen, raten, wiederholen. Sofortiges Feedback macht aus Pauken ein Spiel, das man gewinnen will.",
+      offlineH: "Offline & privat",
+      offlineP: "Keine Daten, kein Konto, kein Internet. Perfekt im Flugzeug — passt ja irgendwie.",
+      mapsH: "Karten, Flaggen, Fotos & Fakten",
+      mapsP: "Jedes Land bekommt eine Seite zum Verweilen — nicht nur einen Namen zum Auswendiglernen.",
+      finalEyebrow: "Ein Kaffee. Alle Hauptstädte.",
+      finalH2: "Sei der Freund, der es immer weiß.",
+      finalP: "Erdkundetest, Quizabend oder die nächste Reise — du bist bereit.",
+    },
+  };
+
+  // quiz: a = index of the correct option
+  const QUIZ = {
+    en: [
+      { f: "🇯🇵", q: "Capital of Japan?", o: ["Tokyo", "Kyoto", "Osaka", "Sapporo"], a: 0 },
+      { f: "🇦🇺", q: "Capital of Australia?", o: ["Sydney", "Melbourne", "Canberra", "Perth"], a: 2 },
+      { f: "🇨🇦", q: "Capital of Canada?", o: ["Toronto", "Ottawa", "Vancouver", "Montreal"], a: 1 },
+      { f: "🇨🇭", q: "Capital of Switzerland?", o: ["Zurich", "Geneva", "Bern", "Basel"], a: 2 },
+      { f: "🇧🇷", q: "Capital of Brazil?", o: ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"], a: 2 },
+      { f: "🇹🇷", q: "Capital of Türkiye?", o: ["Istanbul", "Ankara", "Izmir", "Antalya"], a: 1 },
+      { f: "🇰🇿", q: "Capital of Kazakhstan?", o: ["Almaty", "Astana", "Shymkent", "Karaganda"], a: 1 },
+      { f: "🇲🇦", q: "Capital of Morocco?", o: ["Casablanca", "Marrakesh", "Rabat", "Fes"], a: 2 },
+      { f: "🇳🇿", q: "Capital of New Zealand?", o: ["Auckland", "Wellington", "Christchurch", "Queenstown"], a: 1 },
+      { f: "🇳🇬", q: "Capital of Nigeria?", o: ["Lagos", "Abuja", "Kano", "Ibadan"], a: 1 },
+      { f: "🇻🇳", q: "Capital of Vietnam?", o: ["Ho Chi Minh City", "Hanoi", "Da Nang", "Hue"], a: 1 },
+      { f: "🇺🇸", q: "Capital of the United States?", o: ["New York", "Washington, D.C.", "Los Angeles", "Chicago"], a: 1 },
+    ],
+    ru: [
+      { f: "🇯🇵", q: "Столица Японии?", o: ["Токио", "Киото", "Осака", "Саппоро"], a: 0 },
+      { f: "🇦🇺", q: "Столица Австралии?", o: ["Сидней", "Мельбурн", "Канберра", "Перт"], a: 2 },
+      { f: "🇨🇦", q: "Столица Канады?", o: ["Торонто", "Оттава", "Ванкувер", "Монреаль"], a: 1 },
+      { f: "🇨🇭", q: "Столица Швейцарии?", o: ["Цюрих", "Женева", "Берн", "Базель"], a: 2 },
+      { f: "🇧🇷", q: "Столица Бразилии?", o: ["Рио-де-Жанейро", "Сан-Паулу", "Бразилиа", "Салвадор"], a: 2 },
+      { f: "🇹🇷", q: "Столица Турции?", o: ["Стамбул", "Анкара", "Измир", "Анталья"], a: 1 },
+      { f: "🇰🇿", q: "Столица Казахстана?", o: ["Алматы", "Астана", "Шымкент", "Караганда"], a: 1 },
+      { f: "🇲🇦", q: "Столица Марокко?", o: ["Касабланка", "Марракеш", "Рабат", "Фес"], a: 2 },
+      { f: "🇳🇿", q: "Столица Новой Зеландии?", o: ["Окленд", "Веллингтон", "Крайстчерч", "Куинстаун"], a: 1 },
+      { f: "🇳🇬", q: "Столица Нигерии?", o: ["Лагос", "Абуджа", "Кано", "Ибадан"], a: 1 },
+      { f: "🇻🇳", q: "Столица Вьетнама?", o: ["Хошимин", "Ханой", "Дананг", "Хюэ"], a: 1 },
+      { f: "🇺🇸", q: "Столица США?", o: ["Нью-Йорк", "Вашингтон", "Лос-Анджелес", "Чикаго"], a: 1 },
+    ],
+    es: [
+      { f: "🇯🇵", q: "¿Capital de Japón?", o: ["Tokio", "Kioto", "Osaka", "Sapporo"], a: 0 },
+      { f: "🇦🇺", q: "¿Capital de Australia?", o: ["Sídney", "Melbourne", "Canberra", "Perth"], a: 2 },
+      { f: "🇨🇦", q: "¿Capital de Canadá?", o: ["Toronto", "Ottawa", "Vancouver", "Montreal"], a: 1 },
+      { f: "🇨🇭", q: "¿Capital de Suiza?", o: ["Zúrich", "Ginebra", "Berna", "Basilea"], a: 2 },
+      { f: "🇧🇷", q: "¿Capital de Brasil?", o: ["Río de Janeiro", "São Paulo", "Brasilia", "Salvador"], a: 2 },
+      { f: "🇹🇷", q: "¿Capital de Turquía?", o: ["Estambul", "Ankara", "Esmirna", "Antalya"], a: 1 },
+      { f: "🇰🇿", q: "¿Capital de Kazajistán?", o: ["Almaty", "Astaná", "Shymkent", "Karagandá"], a: 1 },
+      { f: "🇲🇦", q: "¿Capital de Marruecos?", o: ["Casablanca", "Marrakech", "Rabat", "Fez"], a: 2 },
+      { f: "🇳🇿", q: "¿Capital de Nueva Zelanda?", o: ["Auckland", "Wellington", "Christchurch", "Queenstown"], a: 1 },
+      { f: "🇳🇬", q: "¿Capital de Nigeria?", o: ["Lagos", "Abuya", "Kano", "Ibadán"], a: 1 },
+      { f: "🇻🇳", q: "¿Capital de Vietnam?", o: ["Ciudad Ho Chi Minh", "Hanói", "Da Nang", "Hue"], a: 1 },
+      { f: "🇺🇸", q: "¿Capital de Estados Unidos?", o: ["Nueva York", "Washington D. C.", "Los Ángeles", "Chicago"], a: 1 },
+    ],
+    fr: [
+      { f: "🇯🇵", q: "Capitale du Japon ?", o: ["Tokyo", "Kyoto", "Osaka", "Sapporo"], a: 0 },
+      { f: "🇦🇺", q: "Capitale de l'Australie ?", o: ["Sydney", "Melbourne", "Canberra", "Perth"], a: 2 },
+      { f: "🇨🇦", q: "Capitale du Canada ?", o: ["Toronto", "Ottawa", "Vancouver", "Montréal"], a: 1 },
+      { f: "🇨🇭", q: "Capitale de la Suisse ?", o: ["Zurich", "Genève", "Berne", "Bâle"], a: 2 },
+      { f: "🇧🇷", q: "Capitale du Brésil ?", o: ["Rio de Janeiro", "São Paulo", "Brasilia", "Salvador"], a: 2 },
+      { f: "🇹🇷", q: "Capitale de la Turquie ?", o: ["Istanbul", "Ankara", "Izmir", "Antalya"], a: 1 },
+      { f: "🇰🇿", q: "Capitale du Kazakhstan ?", o: ["Almaty", "Astana", "Chymkent", "Karaganda"], a: 1 },
+      { f: "🇲🇦", q: "Capitale du Maroc ?", o: ["Casablanca", "Marrakech", "Rabat", "Fès"], a: 2 },
+      { f: "🇳🇿", q: "Capitale de la Nouvelle-Zélande ?", o: ["Auckland", "Wellington", "Christchurch", "Queenstown"], a: 1 },
+      { f: "🇳🇬", q: "Capitale du Nigeria ?", o: ["Lagos", "Abuja", "Kano", "Ibadan"], a: 1 },
+      { f: "🇻🇳", q: "Capitale du Viêt Nam ?", o: ["Hô Chi Minh-Ville", "Hanoï", "Da Nang", "Hué"], a: 1 },
+      { f: "🇺🇸", q: "Capitale des États-Unis ?", o: ["New York", "Washington", "Los Angeles", "Chicago"], a: 1 },
+    ],
+    de: [
+      { f: "🇯🇵", q: "Hauptstadt von Japan?", o: ["Tokio", "Kyoto", "Osaka", "Sapporo"], a: 0 },
+      { f: "🇦🇺", q: "Hauptstadt von Australien?", o: ["Sydney", "Melbourne", "Canberra", "Perth"], a: 2 },
+      { f: "🇨🇦", q: "Hauptstadt von Kanada?", o: ["Toronto", "Ottawa", "Vancouver", "Montreal"], a: 1 },
+      { f: "🇨🇭", q: "Hauptstadt der Schweiz?", o: ["Zürich", "Genf", "Bern", "Basel"], a: 2 },
+      { f: "🇧🇷", q: "Hauptstadt von Brasilien?", o: ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"], a: 2 },
+      { f: "🇹🇷", q: "Hauptstadt der Türkei?", o: ["Istanbul", "Ankara", "Izmir", "Antalya"], a: 1 },
+      { f: "🇰🇿", q: "Hauptstadt von Kasachstan?", o: ["Almaty", "Astana", "Schymkent", "Karaganda"], a: 1 },
+      { f: "🇲🇦", q: "Hauptstadt von Marokko?", o: ["Casablanca", "Marrakesch", "Rabat", "Fès"], a: 2 },
+      { f: "🇳🇿", q: "Hauptstadt von Neuseeland?", o: ["Auckland", "Wellington", "Christchurch", "Queenstown"], a: 1 },
+      { f: "🇳🇬", q: "Hauptstadt von Nigeria?", o: ["Lagos", "Abuja", "Kano", "Ibadan"], a: 1 },
+      { f: "🇻🇳", q: "Hauptstadt von Vietnam?", o: ["Ho-Chi-Minh-Stadt", "Hanoi", "Da Nang", "Hue"], a: 1 },
+      { f: "🇺🇸", q: "Hauptstadt der USA?", o: ["New York", "Washington, D.C.", "Los Angeles", "Chicago"], a: 1 },
+    ],
+  };
+
+  const TICKER = {
+    en: ["🇫🇷 Paris","🇯🇵 Tokyo","🇪🇬 Cairo","🇧🇷 Brasília","🇮🇸 Reykjavík","🇰🇪 Nairobi","🇦🇷 Buenos Aires","🇨🇦 Ottawa","🇹🇭 Bangkok","🇳🇴 Oslo","🇮🇳 New Delhi","🇵🇪 Lima","🇫🇮 Helsinki","🇲🇽 Mexico City","🇿🇦 Pretoria","🇰🇷 Seoul","🇬🇷 Athens","🇨🇺 Havana"],
+    ru: ["🇫🇷 Париж","🇯🇵 Токио","🇪🇬 Каир","🇧🇷 Бразилиа","🇮🇸 Рейкьявик","🇰🇪 Найроби","🇦🇷 Буэнос-Айрес","🇨🇦 Оттава","🇹🇭 Бангкок","🇳🇴 Осло","🇮🇳 Нью-Дели","🇵🇪 Лима","🇫🇮 Хельсинки","🇲🇽 Мехико","🇿🇦 Претория","🇰🇷 Сеул","🇬🇷 Афины","🇨🇺 Гавана"],
+    es: ["🇫🇷 París","🇯🇵 Tokio","🇪🇬 El Cairo","🇧🇷 Brasilia","🇮🇸 Reikiavik","🇰🇪 Nairobi","🇦🇷 Buenos Aires","🇨🇦 Ottawa","🇹🇭 Bangkok","🇳🇴 Oslo","🇮🇳 Nueva Delhi","🇵🇪 Lima","🇫🇮 Helsinki","🇲🇽 Ciudad de México","🇿🇦 Pretoria","🇰🇷 Seúl","🇬🇷 Atenas","🇨🇺 La Habana"],
+    fr: ["🇫🇷 Paris","🇯🇵 Tokyo","🇪🇬 Le Caire","🇧🇷 Brasilia","🇮🇸 Reykjavik","🇰🇪 Nairobi","🇦🇷 Buenos Aires","🇨🇦 Ottawa","🇹🇭 Bangkok","🇳🇴 Oslo","🇮🇳 New Delhi","🇵🇪 Lima","🇫🇮 Helsinki","🇲🇽 Mexico","🇿🇦 Pretoria","🇰🇷 Séoul","🇬🇷 Athènes","🇨🇺 La Havane"],
+    de: ["🇫🇷 Paris","🇯🇵 Tokio","🇪🇬 Kairo","🇧🇷 Brasília","🇮🇸 Reykjavík","🇰🇪 Nairobi","🇦🇷 Buenos Aires","🇨🇦 Ottawa","🇹🇭 Bangkok","🇳🇴 Oslo","🇮🇳 Neu-Delhi","🇵🇪 Lima","🇫🇮 Helsinki","🇲🇽 Mexiko-Stadt","🇿🇦 Pretoria","🇰🇷 Seoul","🇬🇷 Athen","🇨🇺 Havanna"],
+  };
+
+  const LANGS = ["en", "ru", "es", "fr", "de"];
+  let lang = localStorage.getItem("lang");
+  if (!LANGS.includes(lang)) {
+    const nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+    lang = LANGS.includes(nav) ? nav : "en";
+  }
+
   let qi = 0, streak = 0, locked = false;
   const qEl = document.getElementById("question");
   const oEl = document.getElementById("opts");
   const sEl = document.getElementById("streak");
   const nEl = document.getElementById("qnum");
 
-  function render() {
-    const q = QUIZ[qi % QUIZ.length];
-    nEl.textContent = (qi % QUIZ.length) + 1;
-    qEl.innerHTML = '<span class="flag">' + q.f + '</span> Capital of ' + q.c + '?';
+  function renderQuiz() {
+    const q = QUIZ[lang][qi % QUIZ[lang].length];
+    nEl.textContent = (qi % QUIZ[lang].length) + 1;
+    qEl.innerHTML = '<span class="flag">' + q.f + '</span> ' + q.q;
     oEl.innerHTML = "";
-    q.o.forEach(name => {
+    q.o.forEach((name, i) => {
       const b = document.createElement("button");
       b.className = "opt";
       b.type = "button";
       b.textContent = name;
-      b.addEventListener("click", () => pick(b, name === q.a, q.a));
+      b.addEventListener("click", () => pick(b, i === q.a, q.a));
       oEl.appendChild(b);
     });
     locked = false;
   }
-  function pick(btn, correct, answer) {
+  function pick(btn, correct, answerIdx) {
     if (locked) return;
     locked = true;
     if (correct) {
@@ -343,18 +533,34 @@
     } else {
       btn.classList.add("bad");
       streak = 0;
-      [...oEl.children].find(b => b.textContent === answer).classList.add("good");
+      oEl.children[answerIdx].classList.add("good");
     }
     sEl.textContent = streak;
-    setTimeout(() => { qi += 1; render(); }, correct ? 650 : 1100);
+    setTimeout(() => { qi += 1; renderQuiz(); }, correct ? 650 : 1100);
   }
-  render();
 
-  // ticker
-  const CAPS = ["🇫🇷 Paris","🇯🇵 Tokyo","🇪🇬 Cairo","🇧🇷 Brasília","🇮🇸 Reykjavík","🇰🇪 Nairobi","🇦🇷 Buenos Aires","🇨🇦 Ottawa","🇹🇭 Bangkok","🇳🇴 Oslo","🇮🇳 New Delhi","🇵🇪 Lima","🇫🇮 Helsinki","🇲🇽 Mexico City","🇿🇦 Pretoria","🇰🇷 Seoul","🇬🇷 Athens","🇨🇺 Havana"];
-  const list = CAPS.concat(CAPS);
-  document.getElementById("ticker").innerHTML =
-    list.map(x => "<span>" + x + "</span>").join("");
+  function setLang(next) {
+    lang = next;
+    localStorage.setItem("lang", lang);
+    document.documentElement.lang = lang;
+    const s = STR[lang];
+    document.title = s.title;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      el.innerHTML = s[el.dataset.i18n];
+    });
+    document.getElementById("quiz-note").innerHTML = s.quizNote;
+    document.querySelectorAll("#langs button").forEach(b => {
+      b.classList.toggle("on", b.dataset.lang === lang);
+    });
+    const list = TICKER[lang].concat(TICKER[lang]);
+    document.getElementById("ticker").innerHTML = list.map(x => "<span>" + x + "</span>").join("");
+    renderQuiz();
+  }
+
+  document.querySelectorAll("#langs button").forEach(b => {
+    b.addEventListener("click", () => setLang(b.dataset.lang));
+  });
+  setLang(lang);
 </script>
 </body>
 </html>
