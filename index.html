@@ -3,56 +3,361 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Capitals Trainer — learn all 194 world capitals</title>
-<meta name="description" content="Capitals Trainer is an iPhone app for learning the capitals of the world: flashcards, quizzes, maps, photos, and facts. Works offline, in 5 languages.">
+<title>Capitals Trainer — know every capital on Earth</title>
+<meta name="description" content="Learn all 194 world capitals with flashcards, quizzes, maps and photos. Offline, no ads, no tracking. $0.99 on the App Store.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --ink: #0d0b1e;
+    --surface: #171430;
+    --line: #2a2550;
+    --lavender: #a79bff;
+    --violet: #6457c8;
+    --gold: #f5c842;
+    --fog: #c9c4e4;
+    --white: #f6f5ff;
+    --display: "Unbounded", system-ui, sans-serif;
+    --body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1d1d1f; background: #fff; line-height: 1.6; }
-  .hero { background: linear-gradient(180deg, #9e91f0 0%, #6457c8 100%); color: #fff; text-align: center; padding: 4.5rem 1.25rem 3.5rem; }
-  .hero h1 { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.02em; }
-  .hero p.tagline { font-size: 1.25rem; margin-top: 0.75rem; opacity: 0.92; max-width: 34rem; margin-left: auto; margin-right: auto; }
-  .badge { display: inline-block; margin-top: 1.75rem; padding: 0.8rem 1.6rem; border: 1.5px solid rgba(255,255,255,0.85); border-radius: 14px; color: #fff; text-decoration: none; font-weight: 600; }
-  .badge:hover { background: rgba(255,255,255,0.12); }
-  .shots { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; padding: 3rem 1.25rem 1rem; }
-  .shots img { width: 260px; max-width: 28vw; min-width: 160px; border-radius: 24px; box-shadow: 0 18px 40px rgba(40,25,110,0.25); }
-  section.features { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.25rem 1rem; }
-  section.features h2 { font-size: 1.5rem; margin-bottom: 1rem; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem 2rem; }
-  .grid div { padding: 0.4rem 0; }
-  .grid b { display: block; margin-bottom: 0.15rem; }
-  footer { text-align: center; padding: 2.5rem 1.25rem 3rem; font-size: 0.9rem; color: #6e6e73; }
-  footer a { color: #0066cc; text-decoration: none; margin: 0 0.5rem; }
-  @media (prefers-color-scheme: dark) {
-    body { background: #1c1c1e; color: #f2f2f7; }
-    footer { color: #98989d; } footer a { color: #64a8ff; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--body);
+    background: var(--ink);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  /* aurora */
+  .sky {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(900px 600px at 85% -10%, rgba(100,87,200,0.55), transparent 65%),
+      radial-gradient(700px 500px at -10% 30%, rgba(167,155,255,0.22), transparent 60%),
+      radial-gradient(800px 700px at 60% 110%, rgba(245,200,66,0.10), transparent 60%);
+  }
+  a { color: var(--lavender); }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* header */
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 0;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--white); }
+  .logo-mark {
+    width: 40px; height: 40px; border-radius: 10px; flex: none;
+    background: linear-gradient(160deg, #9e91f0, #6457c8);
+    display: grid; place-items: center; font-size: 20px;
+    box-shadow: 0 4px 18px rgba(100,87,200,0.5);
+  }
+  .logo-name { font-family: var(--display); font-weight: 600; font-size: 0.95rem; letter-spacing: 0.02em; }
+  .nav a { text-decoration: none; color: var(--fog); font-size: 0.9rem; margin-left: 24px; }
+  .nav a:hover { color: var(--white); }
+
+  /* hero */
+  .hero {
+    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px;
+    align-items: center; padding: 56px 0 72px;
+  }
+  .coords {
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 20px;
+  }
+  h1 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+    line-height: 1.08; letter-spacing: -0.01em;
+    margin-bottom: 22px;
+  }
+  h1 em { font-style: normal; color: var(--lavender); }
+  .sub { color: var(--fog); font-size: 1.12rem; max-width: 30rem; margin-bottom: 34px; }
+  .cta-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .store-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--white); color: var(--ink); text-decoration: none;
+    padding: 14px 26px; border-radius: 16px; font-weight: 700; font-size: 1rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 10px 30px rgba(167,155,255,0.25);
+  }
+  .store-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(167,155,255,0.35); }
+  .store-btn svg { width: 22px; height: 22px; }
+  .price-chip { color: var(--fog); font-size: 0.9rem; line-height: 1.4; }
+  .price-chip b { color: var(--white); }
+
+  /* quiz card — the signature */
+  .quiz {
+    background: linear-gradient(165deg, rgba(167,155,255,0.14), rgba(23,20,48,0.9) 45%);
+    border: 1px solid var(--line);
+    border-radius: 28px; padding: 28px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+    transform: rotate(1.5deg);
+  }
+  .quiz-top {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--fog); margin-bottom: 20px;
+  }
+  .quiz-streak { color: var(--gold); }
+  .quiz-q {
+    font-family: var(--display); font-weight: 600; font-size: 1.25rem;
+    line-height: 1.3; margin-bottom: 20px; min-height: 3.2em;
+  }
+  .quiz-q .flag { font-size: 1.6rem; margin-right: 8px; }
+  .quiz-opts { display: grid; gap: 10px; }
+  .opt {
+    font-family: var(--body); font-size: 1rem; text-align: left;
+    background: rgba(255,255,255,0.05); color: var(--white);
+    border: 1px solid var(--line); border-radius: 14px;
+    padding: 13px 16px; cursor: pointer;
+    transition: background 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
+  }
+  .opt:hover { background: rgba(167,155,255,0.14); border-color: var(--lavender); }
+  .opt.good { background: rgba(90,200,120,0.25); border-color: #5ac878; }
+  .opt.bad { background: rgba(230,90,90,0.25); border-color: #e65a5a; animation: shake 0.3s; }
+  .quiz-note { margin-top: 18px; font-size: 0.85rem; color: var(--fog); }
+  .quiz-note a { color: var(--gold); text-decoration: none; }
+  @keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+  /* ticker */
+  .ticker { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; }
+  .ticker-track {
+    display: flex; gap: 48px; width: max-content; padding: 14px 0;
+    font-family: var(--mono); font-size: 0.9rem; color: var(--fog); white-space: nowrap;
+    animation: slide 40s linear infinite;
+  }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* bento */
+  .bento-head { padding: 72px 0 8px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  h2 { font-family: var(--display); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2.2rem); margin-top: 10px; }
+  .bento {
+    display: grid; gap: 16px; padding: 36px 0 8px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 96px;
+  }
+  .tile {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 24px;
+    padding: 26px; overflow: hidden; position: relative;
+  }
+  .tile h3 { font-family: var(--display); font-weight: 600; font-size: 1.05rem; margin-bottom: 8px; }
+  .tile p { color: var(--fog); font-size: 0.95rem; max-width: 26rem; }
+  .t-shot { grid-column: span 2; grid-row: span 4; padding: 0; }
+  .t-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .t-stat { grid-column: span 2; grid-row: span 2; display: flex; flex-direction: column; justify-content: center; }
+  .t-stat .big {
+    font-family: var(--display); font-weight: 800; font-size: 3.4rem; line-height: 1;
+    color: var(--lavender);
+  }
+  .t-stat .cap { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fog); margin-top: 8px; }
+  .t-wide { grid-column: span 2; grid-row: span 2; }
+  .t-lang { grid-column: span 2; grid-row: span 2; }
+  .langs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .langs span {
+    font-family: var(--mono); font-size: 0.8rem; padding: 6px 12px;
+    border: 1px solid var(--line); border-radius: 999px; color: var(--fog);
+  }
+  .t-dark { grid-column: span 2; grid-row: span 4; padding: 0; }
+  .t-dark img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .t-offline { grid-column: span 2; grid-row: span 2; }
+  .gold-dot { color: var(--gold); }
+
+  /* final cta */
+  .final { text-align: center; padding: 96px 0 80px; }
+  .final h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 16px; }
+  .final p { color: var(--fog); margin-bottom: 32px; }
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0 44px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    color: var(--fog); font-size: 0.88rem;
+  }
+  footer a { text-decoration: none; margin-right: 20px; }
+  footer a:hover { color: var(--white); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; }
+    .quiz { transform: none; }
+    .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: auto; }
+    .t-shot, .t-dark { grid-row: span 1; min-height: 320px; }
+    .t-stat, .t-wide, .t-lang, .t-offline { grid-row: span 1; grid-column: span 2; }
+    .t-shot, .t-dark { grid-column: span 1; }
+  }
+  @media (max-width: 560px) {
+    .bento { grid-template-columns: 1fr; }
+    .t-shot, .t-dark { grid-column: span 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track { animation: none; }
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
   }
 </style>
 </head>
 <body>
-<div class="hero">
-  <h1>Capitals Trainer</h1>
-  <p class="tagline">Learn all 194 world capitals with flashcards, quizzes, maps, and beautiful photos — fully offline, no ads.</p>
-  <a class="badge" href="https://apps.apple.com/app/id6789187328">Download on the App&nbsp;Store</a>
-</div>
-<div class="shots">
-  <img src="img/home.png" alt="Home screen with 194 capitals">
-  <img src="img/continent.png" alt="Study sets by continent">
-  <img src="img/dark.png" alt="Dark mode">
-</div>
-<section class="features">
-  <h2>Why Capitals Trainer</h2>
-  <div class="grid">
-    <div><b>Flashcards &amp; quizzes</b>Fast memorization with instant feedback.</div>
-    <div><b>Every country</b>Maps, flags, photos, and key facts for 194 countries.</div>
-    <div><b>By continent</b>Study sets from Europe to Oceania.</div>
-    <div><b>Progress tracking</b>Always know what's left to learn.</div>
-    <div><b>5 languages</b>English, Русский, Español, Français, Deutsch.</div>
-    <div><b>Offline &amp; private</b>No account, no ads, no data collection.</div>
+<div class="sky" aria-hidden="true"></div>
+<div class="wrap">
+
+<header>
+  <a class="logo" href="#">
+    <span class="logo-mark" aria-hidden="true">🌐</span>
+    <span class="logo-name">Capitals&nbsp;Trainer</span>
+  </a>
+  <nav class="nav">
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="coords">48.8566° N · 2.3522° E — do you know whose?</p>
+    <h1>Know every capital on <em>Earth</em>.</h1>
+    <p class="sub">All 194 countries. Flashcards that stick, quizzes that bite, maps, flags and photos that make places real. Offline, no ads — just you and the planet.</p>
+    <div class="cta-row">
+      <a class="store-btn" href="https://apps.apple.com/app/id6789187328">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-2.9 2.37-4.29 2.48-4.36-1.35-1.97-3.45-2.24-4.2-2.27-1.79-.18-3.49 1.05-4.4 1.05-.9 0-2.3-1.03-3.79-1-1.95.03-3.74 1.13-4.74 2.87-2.02 3.5-.52 8.68 1.45 11.52.96 1.39 2.11 2.95 3.62 2.9 1.45-.06 2-.94 3.75-.94s2.25.94 3.79.91c1.56-.03 2.55-1.42 3.5-2.82 1.1-1.61 1.55-3.17 1.58-3.25-.04-.02-3.02-1.16-3.04-4.61zM14.16 4.02c.8-.97 1.34-2.32 1.19-3.66-1.15.05-2.55.77-3.38 1.74-.74.85-1.39 2.22-1.22 3.53 1.29.1 2.6-.65 3.41-1.61z"/></svg>
+        Download on the App&nbsp;Store
+      </a>
+      <p class="price-chip"><b>$0.99</b> once · no subscriptions<br>no ads · no tracking</p>
+    </div>
+  </div>
+
+  <div class="quiz" id="quiz">
+    <div class="quiz-top">
+      <span>Try it — round <span id="qnum">1</span></span>
+      <span class="quiz-streak">★ streak: <span id="streak">0</span></span>
+    </div>
+    <p class="quiz-q" id="question"></p>
+    <div class="quiz-opts" id="opts"></div>
+    <p class="quiz-note">That little rush? The app has 194 of these. <a href="https://apps.apple.com/app/id6789187328">Get it →</a></p>
   </div>
 </section>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<div class="wrap">
+<section>
+  <div class="bento-head">
+    <p class="eyebrow">What's inside</p>
+    <h2>A pocket atlas that quizzes back</h2>
+  </div>
+  <div class="bento">
+    <div class="tile t-shot"><img src="img/raw-home.png" alt="Capitals Trainer home screen with study sets" loading="lazy"></div>
+    <div class="tile t-stat">
+      <span class="big">194</span>
+      <span class="cap">countries · 6 continents</span>
+    </div>
+    <div class="tile t-wide">
+      <h3>Flashcards &amp; quizzes</h3>
+      <p>Flip, guess, repeat. Instant feedback turns cramming into a game you keep winning.</p>
+    </div>
+    <div class="tile t-offline">
+      <h3>Offline &amp; private <span class="gold-dot">●</span></h3>
+      <p>Zero data collected, no account, no internet needed. Perfect on a plane — fitting, really.</p>
+    </div>
+    <div class="tile t-lang">
+      <h3>Speaks your language</h3>
+      <div class="langs"><span>EN</span><span>РУ</span><span>ES</span><span>FR</span><span>DE</span></div>
+    </div>
+    <div class="tile t-wide">
+      <h3>Maps, flags, photos &amp; facts</h3>
+      <p>Every country gets a page worth lingering on — not just a name to memorize.</p>
+    </div>
+    <div class="tile t-dark"><img src="img/raw-dark.png" alt="Dark mode home screen" loading="lazy"></div>
+  </div>
+</section>
+
+<section class="final">
+  <p class="eyebrow">One coffee. Every capital.</p>
+  <h2>Be the friend who always knows.</h2>
+  <p>Geography test, quiz night or the next trip — you're covered.</p>
+  <a class="store-btn" href="https://apps.apple.com/app/id6789187328">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.54c-.03-2.9 2.37-4.29 2.48-4.36-1.35-1.97-3.45-2.24-4.2-2.27-1.79-.18-3.49 1.05-4.4 1.05-.9 0-2.3-1.03-3.79-1-1.95.03-3.74 1.13-4.74 2.87-2.02 3.5-.52 8.68 1.45 11.52.96 1.39 2.11 2.95 3.62 2.9 1.45-.06 2-.94 3.75-.94s2.25.94 3.79.91c1.56-.03 2.55-1.42 3.5-2.82 1.1-1.61 1.55-3.17 1.58-3.25-.04-.02-3.02-1.16-3.04-4.61zM14.16 4.02c.8-.97 1.34-2.32 1.19-3.66-1.15.05-2.55.77-3.38 1.74-.74.85-1.39 2.22-1.22 3.53 1.29.1 2.6-.65 3.41-1.61z"/></svg>
+    Get Capitals Trainer — $0.99
+  </a>
+</section>
+
 <footer>
-  <a href="support.html">Support</a> · <a href="privacy.html">Privacy Policy</a><br>
-  © 2026 Alena Krasnoperova
+  <div>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+  <div>© 2026 Alena Krasnoperova</div>
 </footer>
+</div>
+
+<script>
+  // hero quiz
+  const QUIZ = [
+    { f: "🇯🇵", c: "Japan", a: "Tokyo", o: ["Tokyo", "Kyoto", "Osaka", "Sapporo"] },
+    { f: "🇦🇺", c: "Australia", a: "Canberra", o: ["Sydney", "Melbourne", "Canberra", "Perth"] },
+    { f: "🇨🇦", c: "Canada", a: "Ottawa", o: ["Toronto", "Ottawa", "Vancouver", "Montreal"] },
+    { f: "🇨🇭", c: "Switzerland", a: "Bern", o: ["Zurich", "Geneva", "Bern", "Basel"] },
+    { f: "🇧🇷", c: "Brazil", a: "Brasília", o: ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"] },
+    { f: "🇹🇷", c: "Türkiye", a: "Ankara", o: ["Istanbul", "Ankara", "Izmir", "Antalya"] },
+    { f: "🇰🇿", c: "Kazakhstan", a: "Astana", o: ["Almaty", "Astana", "Shymkent", "Karaganda"] },
+    { f: "🇲🇦", c: "Morocco", a: "Rabat", o: ["Casablanca", "Marrakesh", "Rabat", "Fes"] },
+    { f: "🇳🇿", c: "New Zealand", a: "Wellington", o: ["Auckland", "Wellington", "Christchurch", "Queenstown"] },
+    { f: "🇳🇬", c: "Nigeria", a: "Abuja", o: ["Lagos", "Abuja", "Kano", "Ibadan"] },
+    { f: "🇻🇳", c: "Vietnam", a: "Hanoi", o: ["Ho Chi Minh City", "Hanoi", "Da Nang", "Hue"] },
+    { f: "🇺🇸", c: "United States", a: "Washington, D.C.", o: ["New York", "Washington, D.C.", "Los Angeles", "Chicago"] },
+  ];
+  let qi = 0, streak = 0, locked = false;
+  const qEl = document.getElementById("question");
+  const oEl = document.getElementById("opts");
+  const sEl = document.getElementById("streak");
+  const nEl = document.getElementById("qnum");
+
+  function render() {
+    const q = QUIZ[qi % QUIZ.length];
+    nEl.textContent = (qi % QUIZ.length) + 1;
+    qEl.innerHTML = '<span class="flag">' + q.f + '</span> Capital of ' + q.c + '?';
+    oEl.innerHTML = "";
+    q.o.forEach(name => {
+      const b = document.createElement("button");
+      b.className = "opt";
+      b.type = "button";
+      b.textContent = name;
+      b.addEventListener("click", () => pick(b, name === q.a, q.a));
+      oEl.appendChild(b);
+    });
+    locked = false;
+  }
+  function pick(btn, correct, answer) {
+    if (locked) return;
+    locked = true;
+    if (correct) {
+      btn.classList.add("good");
+      streak += 1;
+    } else {
+      btn.classList.add("bad");
+      streak = 0;
+      [...oEl.children].find(b => b.textContent === answer).classList.add("good");
+    }
+    sEl.textContent = streak;
+    setTimeout(() => { qi += 1; render(); }, correct ? 650 : 1100);
+  }
+  render();
+
+  // ticker
+  const CAPS = ["🇫🇷 Paris","🇯🇵 Tokyo","🇪🇬 Cairo","🇧🇷 Brasília","🇮🇸 Reykjavík","🇰🇪 Nairobi","🇦🇷 Buenos Aires","🇨🇦 Ottawa","🇹🇭 Bangkok","🇳🇴 Oslo","🇮🇳 New Delhi","🇵🇪 Lima","🇫🇮 Helsinki","🇲🇽 Mexico City","🇿🇦 Pretoria","🇰🇷 Seoul","🇬🇷 Athens","🇨🇺 Havana"];
+  const list = CAPS.concat(CAPS);
+  document.getElementById("ticker").innerHTML =
+    list.map(x => "<span>" + x + "</span>").join("");
+</script>
 </body>
 </html>
